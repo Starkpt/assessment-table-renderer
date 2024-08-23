@@ -1,0 +1,26 @@
+[
+  {
+    "categoryId": "bikes",
+    "category": "Bikes",
+    "subCategoryId": "mountain-bikes",
+    "subCategory": "Mountain Bike"
+  },
+  {
+    "categoryId": "bikes",
+    "category": "Bikes",
+    "subCategoryId": "road-bikes",
+    "subCategory": "Road Bike"
+  },
+  {
+    "categoryId": "bikes",
+    "category": "Bikes",
+    "subCategoryId": "touring-bikes",
+    "subCategory": "Touring Bike"
+  },
+  {
+    "categoryId": "complementary-products",
+    "category": "Complementary Products",
+    "subCategoryId": "subscription",
+    "subCategory": "Subscription"
+  }
+]
