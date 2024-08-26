@@ -1,6 +1,126 @@
 import React from "react";
 import { DataItem, Header, RowCategory } from "../../types/types";
 
+/**
+ *
+ * HEADER RENDERING HELPER FUNCTIONS
+ *
+ * - renderHeader() for singular header
+ * - renderHeaders() for multiple/group of headers
+ *
+ */
+
+export function renderHeader(
+  header: Header,
+  id: number,
+  handleColumnVisibility?: any,
+  hiddenColumns?: string[]
+) {
+  console.log(hiddenColumns);
+  return (
+    <React.Fragment key={id}>
+      <th>
+        {header.name}
+
+        {header.subHeaders && (
+          <button
+            onClick={() => {
+              handleColumnVisibility(header.id);
+            }}
+          >
+            {hiddenColumns?.find((column) => column === header.id) ? ">" : "<"}
+          </button>
+        )}
+      </th>
+
+      {hiddenColumns?.find((column) => column === header.id)
+        ? null
+        : header.subHeaders &&
+          renderHeaders(
+            header.subHeaders,
+            handleColumnVisibility,
+            hiddenColumns
+          )}
+    </React.Fragment>
+  );
+}
+
+export function renderHeaders(
+  headers: Header[],
+  handleColumnVisibility?: any,
+  hiddenColumns?: string[]
+): React.ReactNode {
+  return headers.map((header: Header, id) =>
+    renderHeader(header, id, handleColumnVisibility, hiddenColumns)
+  );
+}
+
+/**
+ *
+ * CELL RENDERING HELPER FUNCTIONS
+ *
+ * - renderCell() for singular cell
+ * - renderCells() for multiple/group of cells
+ *
+ */
+
+export function renderCell(
+  data: DataItem[],
+  header: Header,
+  row: RowCategory,
+  id: number,
+  hiddenColumns?: string[]
+): React.ReactNode {
+  const cellValue = data.find((item) => item.locationId === header.id);
+
+  return (
+    <React.Fragment key={id}>
+      <td>
+        <table>
+          <tbody>
+            <tr>
+              <td>{cellValue?.units || 0}</td>
+            </tr>
+            <tr>
+              <td>{cellValue?.unitPrice[0].value || 0}</td>
+            </tr>
+            <tr>
+              <td>{cellValue?.grossRevenue || 0}</td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+
+      {hiddenColumns?.find((column) => column === header.id)
+        ? null
+        : header.subHeaders &&
+          header.subHeaders.map((subHeader, id) =>
+            renderCell(data, subHeader, row, id, hiddenColumns)
+          )}
+    </React.Fragment>
+  );
+}
+
+export function renderCells(
+  data: DataItem[],
+  headers: Header[],
+  row: RowCategory,
+  hiddenColumns: string[]
+): React.ReactNode {
+  return headers.map((header, id) =>
+    renderCell(data, header, row, id, hiddenColumns)
+  );
+}
+
+/**
+ *
+ * ROW RENDERING HELPER FUNCTIONS
+ *
+ * - renderRow() for singular row
+ * - renderRows() for multiple/group of rows
+ *
+ */
+
 const renderCategoryCell = (category: string) => (
   <td>
     <table>
@@ -37,98 +157,43 @@ const renderUnitCell = () => (
   </td>
 );
 
-export function renderHeader(header: Header, id: number) {
-  return (
-    <React.Fragment key={id}>
-      <th>{header.name}</th>
-
-      {header.subHeaders && renderHeaders(header.subHeaders)}
-    </React.Fragment>
-  );
-}
-
-export function renderHeaders(headers: Header[]): React.ReactNode {
-  return headers.map((header: Header, id) => renderHeader(header, id));
-}
-
-export function renderCell(
-  data: DataItem[],
-  header: Header,
-  row: RowCategory,
-  id: number
-): React.ReactNode {
-  const cellValue = data.find((item) => item.locationId === header.id);
-
-  return (
-    <React.Fragment key={id}>
-      <td>
-        <table>
-          <tbody>
-            <tr>
-              <td>{cellValue?.units || 0}</td>
-            </tr>
-            <tr>
-              <td>{cellValue?.unitPrice[0].value || 0}</td>
-            </tr>
-            <tr>
-              <td>{cellValue?.grossRevenue || 0}</td>
-            </tr>
-          </tbody>
-        </table>
-      </td>
-
-      {header.subHeaders &&
-        header.subHeaders.map((subHeader, id) => {
-          return renderCell(data, subHeader, row, id);
-        })}
-    </React.Fragment>
-  );
-}
-
-export function renderCells(
-  data: DataItem[],
-  headers: Header[],
-  row: RowCategory
-): React.ReactNode {
-  return headers.map((header, id) => {
-    return renderCell(data, header, row, id);
-  });
-}
-
 export function renderRow(
   data: DataItem[],
   headers: Header[],
   row: RowCategory,
-  id: number
+  id: number,
+  hiddenColumns?: string[]
 ): React.ReactNode {
+  const rowData = data.filter((item) => item.categoryId === row.categoryId);
+
   return (
     <>
       <tr key={id}>
         {renderCategoryCell(row.category)}
         {renderUnitCell()}
-        {headers?.map((header, headerId) => {
-          const newData = data.filter(
-            (item) => item.categoryId === row.categoryId
-          );
-          return header && renderCell(newData, header, row, headerId);
-        })}
+        {headers?.map(
+          (header, headerId) =>
+            header && renderCell(rowData, header, row, headerId, hiddenColumns)
+        )}
       </tr>
 
-      {row.subCategories?.map((subCategory, id) => (
-        <tr key={id}>
-          {renderCategoryCell(subCategory.category)}
-          {renderUnitCell()}
-          {headers?.map((header, subHeaderId) => {
-            const newData = data.filter(
-              (item) => item.subCategoryId === subCategory.categoryId
-            );
+      {row.subCategories?.map((subRow, subRowId) => {
+        const subRowData = data.filter(
+          (item) => item.subCategoryId === subRow.categoryId
+        );
 
-            return (
-              header.subHeaders && renderCell(newData, header, row, subHeaderId)
-            );
-          })}
-        </tr>
-      ))}
+        return (
+          <tr key={subRowId}>
+            {renderCategoryCell(subRow.category)}
+            {renderUnitCell()}
+            {headers?.map(
+              (header, subHeaderId) =>
+                header.subHeaders &&
+                renderCell(subRowData, header, row, subHeaderId, hiddenColumns)
+            )}
+          </tr>
+        );
+      })}
     </>
   );
 }
@@ -136,7 +201,13 @@ export function renderRow(
 export function renderRows(
   data: DataItem[],
   headers: Header[],
-  rows: RowCategory[]
+  rows: RowCategory[],
+  hiddenColumns?: string[]
 ) {
-  return rows && rows.map((row, rowId) => renderRow(data, headers, row, rowId));
+  return (
+    rows &&
+    rows.map((row, rowId) =>
+      renderRow(data, headers, row, rowId, hiddenColumns)
+    )
+  );
 }

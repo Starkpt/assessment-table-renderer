@@ -1,3 +1,4 @@
+import { useState } from "react";
 import categories from "../../data/categories.json";
 import data from "../../data/dummy_data2.json";
 import { Header, RowCategory } from "../../types/types";
@@ -11,14 +12,16 @@ const headers: Header[] = [
       {
         name: "Germany",
         id: "germany",
-      },
-      {
-        name: "Freiburg",
-        id: "freiburg",
-      },
-      {
-        name: "Berlin",
-        id: "berlin",
+        subHeaders: [
+          {
+            name: "Freiburg",
+            id: "freiburg",
+          },
+          {
+            name: "Berlin",
+            id: "berlin",
+          },
+        ],
       },
       {
         name: "Great Britain",
@@ -36,7 +39,9 @@ const headers: Header[] = [
 
 function Table() {
   const rows = categories.reduce((acc: RowCategory[], cur) => {
-    let existingCategory = acc.find((entry) => entry.categoryId === cur.categoryId);
+    let existingCategory = acc.find(
+      (entry) => entry.categoryId === cur.categoryId
+    );
 
     if (!existingCategory) {
       existingCategory = {
@@ -50,7 +55,9 @@ function Table() {
 
     if (
       existingCategory.subCategories &&
-      !existingCategory.subCategories.some((sub) => sub.categoryId === cur.subCategoryId)
+      !existingCategory.subCategories.some(
+        (sub) => sub.categoryId === cur.subCategoryId
+      )
     ) {
       existingCategory.subCategories.push({
         category: cur.subCategory,
@@ -61,6 +68,16 @@ function Table() {
     return acc;
   }, []);
 
+  const [hiddenColumns, setHiddenColumns] = useState<string[]>([]);
+
+  const handleColumnVisibility = (colName: any) => {
+    setHiddenColumns((prevValues) =>
+      prevValues.includes(colName)
+        ? prevValues.filter((column) => column !== colName)
+        : [...prevValues, colName]
+    );
+  };
+
   return (
     <div>
       <table>
@@ -69,11 +86,11 @@ function Table() {
             <th></th>
             <th></th>
 
-            {renderHeaders(headers)}
+            {renderHeaders(headers, handleColumnVisibility, hiddenColumns)}
           </tr>
         </thead>
 
-        <tbody>{renderRows(data, headers, rows)}</tbody>
+        <tbody>{renderRows(data, headers, rows, hiddenColumns)}</tbody>
       </table>
     </div>
   );
