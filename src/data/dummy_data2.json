@@ -46,6 +46,29 @@
     ]
   },
   {
+    "id": 122,
+    "version": "5.0.4",
+    "categoryId": "bikes",
+    "subCategoryId": "mountain-bikes",
+    "locationId": "london",
+    "location": "London",
+    "legalEntity": 11,
+    "grossRevenue": 26578,
+    "units": 2231111,
+    "unitPrice": [
+      {
+        "currencyCode": "eur",
+        "currency": "Euro",
+        "value": 324
+      },
+      {
+        "currencyCode": "usd",
+        "currency": "US Dollar",
+        "value": 323
+      }
+    ]
+  },
+  {
     "id": 2,
     "version": "4.0.4",
     "categoryId": "bikes",
@@ -97,7 +120,7 @@
     "categoryId": "bikes",
     "subCategoryId": "mountain-bikes",
     "locationId": "great-britain",
-    "location": "",
+    "location": "Great Britain",
     "legalEntity": 11,
     "grossRevenue": 267546,
     "units": 267546,
@@ -213,7 +236,7 @@
     "categoryId": "bikes",
     "subCategoryId": "road-bikes",
     "locationId": "great-britain",
-    "location": "",
+    "location": "Great Britain",
     "legalEntity": 11,
     "grossRevenue": 267546,
     "units": 267546,
@@ -262,7 +285,7 @@
     "locationId": "germany",
     "location": "Germany",
     "legalEntity": 11,
-    "grossRevenue": 10494413,
+    "grossRevenue": 0,
     "units": 18947,
     "unitPrice": [
       {
@@ -329,7 +352,7 @@
     "categoryId": "bikes",
     "subCategoryId": "touring-bikes",
     "locationId": "great-britain",
-    "location": "",
+    "location": "Great Britain",
     "legalEntity": 11,
     "grossRevenue": 267546,
     "units": 267546,
