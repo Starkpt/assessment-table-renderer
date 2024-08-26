@@ -1,219 +1,396 @@
 [
   {
+    "id": 0,
     "version": "5.1.2",
-    "product": {
-      "parentCategoryId": null,
-      "parentCategory": null,
-      "categoryId": "all-products",
-      "category": "all-products",
-      "subCategoryId": "bikes",
-      "subCategory": "Bikes"
-    },
-    "units": 1667,
+    "categoryId": "bikes",
+    "subCategoryId": "mountain-bikes",
+    "locationId": "europe",
+    "location": "Europe",
+    "legalEntity": 11,
+    "grossRevenue": 406066,
+    "units": 1253,
     "unitPrice": [
       {
         "currencyCode": "eur",
         "currency": "Euro",
-        "value": 27.579
+        "value": 324
       },
       {
         "currencyCode": "usd",
         "currency": "US Dollar",
-        "value": 27.012
+        "value": 323
       }
-    ],
-    "grossRevenue": 21352.22,
-    "location": {
-      "continent": "Europe",
-      "country": "Germany",
-      "city": "Berlin"
-    },
-    "legalEntity": 13
+    ]
   },
   {
+    "id": 1,
     "version": "5.0.4",
-    "product": {
-      "parentCategoryId": null,
-      "parentCategory": null,
-      "categoryId": "all-products",
-      "category": "all-products",
-      "subCategoryId": null,
-      "subCategory": null
-    },
-    "units": 88454,
+    "categoryId": "bikes",
+    "subCategoryId": "mountain-bikes",
+    "locationId": "germany",
+    "location": "Germany",
+    "legalEntity": 11,
+    "grossRevenue": 26578,
+    "units": 26578,
     "unitPrice": [
       {
         "currencyCode": "eur",
         "currency": "Euro",
-        "value": 963.31
+        "value": 324
       },
       {
         "currencyCode": "usd",
         "currency": "US Dollar",
-        "value": 962.571
+        "value": 323
       }
-    ],
-    "grossRevenue": 118880,
-    "location": {
-      "continent": "Europe",
-      "country": "Germany",
-      "city": "Freiburg"
-    },
-    "legalEntity": 11
+    ]
   },
   {
+    "id": 122,
+    "version": "5.0.4",
+    "categoryId": "bikes",
+    "subCategoryId": "mountain-bikes",
+    "locationId": "london",
+    "location": "London",
+    "legalEntity": 11,
+    "grossRevenue": 26578,
+    "units": 2231111,
+    "unitPrice": [
+      {
+        "currencyCode": "eur",
+        "currency": "Euro",
+        "value": 324
+      },
+      {
+        "currencyCode": "usd",
+        "currency": "US Dollar",
+        "value": 323
+      }
+    ]
+  },
+  {
+    "id": 2,
     "version": "4.0.4",
-    "product": {
-      "parentCategoryId": null,
-      "parentCategory": null,
-      "categoryId": "all-products",
-      "category": "all-products",
-      "subCategoryId": null,
-      "subCategory": null
-    },
-    "units": 1667,
+    "categoryId": "bikes",
+    "subCategoryId": "mountain-bikes",
+    "locationId": "freiburg",
+    "location": "Freiburg",
+    "legalEntity": 11,
+    "grossRevenue": 267578,
+    "units": 267578,
     "unitPrice": [
       {
         "currencyCode": "eur",
         "currency": "Euro",
-        "value": 0
+        "value": 267578
       },
       {
         "currencyCode": "usd",
         "currency": "US Dollar",
-        "value": 0
+        "value": 267578
       }
-    ],
+    ]
+  },
+  {
+    "id": 3,
+    "version": "5.6.4",
+    "categoryId": "bikes",
+    "subCategoryId": "mountain-bikes",
+    "locationId": "berlin",
+    "location": "Berlin",
+    "legalEntity": 11,
+    "grossRevenue": 267546,
+    "units": 267546,
+    "unitPrice": [
+      {
+        "currencyCode": "eur",
+        "currency": "Euro",
+        "value": 267546
+      },
+      {
+        "currencyCode": "usd",
+        "currency": "US Dollar",
+        "value": 267546
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "version": "5.6.4",
+    "categoryId": "bikes",
+    "subCategoryId": "mountain-bikes",
+    "locationId": "great-britain",
+    "location": "Great Britain",
+    "legalEntity": 11,
+    "grossRevenue": 267546,
+    "units": 267546,
+    "unitPrice": [
+      {
+        "currencyCode": "eur",
+        "currency": "Euro",
+        "value": 267546
+      },
+      {
+        "currencyCode": "usd",
+        "currency": "US Dollar",
+        "value": 267546
+      }
+    ]
+  },
+
+  {
+    "id": 5,
+    "version": "5.8.33",
+    "categoryId": "bikes",
+    "subCategoryId": "road-bikes",
+    "locationId": "europe",
+    "location": "Europe",
+    "legalEntity": 11,
+    "grossRevenue": 8792973,
+    "units": 15876,
+    "unitPrice": [
+      {
+        "currencyCode": "eur",
+        "currency": "Euro",
+        "value": 554
+      },
+      {
+        "currencyCode": "usd",
+        "currency": "US Dollar",
+        "value": 554
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "version": "77.5.7",
+    "categoryId": "bikes",
+    "subCategoryId": "road-bikes",
+    "locationId": "germany",
+    "location": "Germany",
+    "legalEntity": 11,
+    "grossRevenue": 10494413,
+    "units": 18947,
+    "unitPrice": [
+      {
+        "currencyCode": "eur",
+        "currency": "Euro",
+        "value": 554
+      },
+      {
+        "currencyCode": "usd",
+        "currency": "US Dollar",
+        "value": 553
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "version": "50.597.7",
+    "categoryId": "bikes",
+    "subCategoryId": "road-bikes",
+    "locationId": "freiburg",
+    "location": "Freiburg",
+    "legalEntity": 11,
+    "grossRevenue": 267578,
+    "units": 267578,
+    "unitPrice": [
+      {
+        "currencyCode": "eur",
+        "currency": "Euro",
+        "value": 267578
+      },
+      {
+        "currencyCode": "usd",
+        "currency": "US Dollar",
+        "value": 267578
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "version": "5.6.4",
+    "categoryId": "bikes",
+    "subCategoryId": "road-bikes",
+    "locationId": "berlin",
+    "location": "Berlin",
+    "legalEntity": 11,
+    "grossRevenue": 267546,
+    "units": 267546,
+    "unitPrice": [
+      {
+        "currencyCode": "eur",
+        "currency": "Euro",
+        "value": 267546
+      },
+      {
+        "currencyCode": "usd",
+        "currency": "US Dollar",
+        "value": 267546
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "version": "9.87.7",
+    "categoryId": "bikes",
+    "subCategoryId": "road-bikes",
+    "locationId": "great-britain",
+    "location": "Great Britain",
+    "legalEntity": 11,
+    "grossRevenue": 267546,
+    "units": 267546,
+    "unitPrice": [
+      {
+        "currencyCode": "eur",
+        "currency": "Euro",
+        "value": 267546
+      },
+      {
+        "currencyCode": "usd",
+        "currency": "US Dollar",
+        "value": 267546
+      }
+    ]
+  },
+
+  {
+    "id": 10,
+    "version": "1.555",
+    "categoryId": "bikes",
+    "subCategoryId": "touring-bikes",
+    "locationId": "europe",
+    "location": "Europe",
+    "legalEntity": 11,
     "grossRevenue": 0,
-    "location": {
-      "continent": "Europe",
-      "country": "Great Britain",
-      "city": "Manchester"
-    },
-    "legalEntity": 11
-  },
-  {
-    "product": {
-      "parentCategoryId": null,
-      "parentCategory": null,
-      "categoryId": "complementary-products",
-      "category": "complementary-products",
-      "subCategoryId": null,
-      "subCategory": null
-    },
-    "version": "5.6.4",
-    "units": 1667,
+    "units": 0,
     "unitPrice": [
       {
         "currencyCode": "eur",
         "currency": "Euro",
-        "value": 31.4
+        "value": 0
       },
       {
         "currencyCode": "usd",
         "currency": "US Dollar",
-        "value": 30.97
+        "value": 0
       }
-    ],
-    "grossRevenue": 21352.22,
-    "location": {
-      "continent": "Europe",
-      "country": "Great Britain",
-      "city": "London"
-    },
-    "legalEntity": 11
+    ]
   },
   {
-    "version": "5.6.4",
-    "product": {
-      "parentCategoryId": null,
-      "parentCategory": null,
-      "categoryId": "all-products",
-      "category": "all-products",
-      "subCategoryId": null,
-      "subCategory": null
-    },
-    "units": 1667,
+    "id": 11,
+    "version": "7",
+    "categoryId": "bikes",
+    "subCategoryId": "touring-bikes",
+    "locationId": "germany",
+    "location": "Germany",
+    "legalEntity": 11,
+    "grossRevenue": 0,
+    "units": 18947,
     "unitPrice": [
       {
         "currencyCode": "eur",
         "currency": "Euro",
-        "value": 34.88
+        "value": 554
       },
       {
         "currencyCode": "usd",
         "currency": "US Dollar",
-        "value": 35.479
+        "value": 553
       }
-    ],
-    "grossRevenue": 21352.22,
-    "location": {
-      "continent": "Asia",
-      "country": "Japan",
-      "city": "Tokyo"
-    },
-    "legalEntity": 10
+    ]
   },
   {
-    "version": "5.6.4",
-    "product": {
-      "parentCategoryId": null,
-      "parentCategory": null,
-      "categoryId": "all-products",
-      "category": "all-products",
-      "subCategoryId": null,
-      "subCategory": null
-    },
-    "units": 1667,
+    "id": 12,
+    "version": "9.3",
+    "categoryId": "bikes",
+    "subCategoryId": "touring-bikes",
+    "locationId": "freiburg",
+    "location": "Freiburg",
+    "legalEntity": 11,
+    "grossRevenue": 267578,
+    "units": 267578,
     "unitPrice": [
       {
         "currencyCode": "eur",
         "currency": "Euro",
-        "value": 547
+        "value": 267578
       },
       {
         "currencyCode": "usd",
         "currency": "US Dollar",
-        "value": 645
+        "value": 267578
       }
-    ],
-    "grossRevenue": 21352.22,
-    "location": {
-      "continent": "Asia",
-      "country": "Japan",
-      "city": "Osaka"
-    },
-    "legalEntity": 10
+    ]
   },
   {
-    "version": "5.6.4",
-    "product": {
-      "parentCategoryId": null,
-      "parentCategory": null,
-      "categoryId": "all-products",
-      "category": "all-products",
-      "subCategoryId": null,
-      "subCategory": null
-    },
-    "units": 1667,
+    "id": 13,
+    "version": "46",
+    "categoryId": "bikes",
+    "subCategoryId": "touring-bikes",
+    "locationId": "berlin",
+    "location": "Berlin",
+    "legalEntity": 11,
+    "grossRevenue": 267546,
+    "units": 267546,
     "unitPrice": [
       {
         "currencyCode": "eur",
         "currency": "Euro",
-        "value": 1112
+        "value": 267546
       },
       {
         "currencyCode": "usd",
         "currency": "US Dollar",
-        "value": 888
+        "value": 267546
       }
-    ],
-    "grossRevenue": 21352.22,
-    "location": {
-      "continent": "Asia",
-      "country": "Japan",
-      "city": "Osaka"
-    },
-    "legalEntity": 10
+    ]
+  },
+  {
+    "id": 14,
+    "version": "258",
+    "categoryId": "bikes",
+    "subCategoryId": "touring-bikes",
+    "locationId": "great-britain",
+    "location": "Great Britain",
+    "legalEntity": 11,
+    "grossRevenue": 267546,
+    "units": 267546,
+    "unitPrice": [
+      {
+        "currencyCode": "eur",
+        "currency": "Euro",
+        "value": 267546
+      },
+      {
+        "currencyCode": "usd",
+        "currency": "US Dollar",
+        "value": 267546
+      }
+    ]
+  },
+
+  {
+    "id": 15,
+    "version": "258",
+    "categoryId": "complementary-products",
+    "subCategoryId": "subscription",
+    "locationId": "europe",
+    "location": "Europe",
+    "legalEntity": 11,
+    "grossRevenue": 0,
+    "units": 430956,
+    "unitPrice": [
+      {
+        "currencyCode": "eur",
+        "currency": "Euro",
+        "value": 0
+      },
+      {
+        "currencyCode": "usd",
+        "currency": "US Dollar",
+        "value": 0
+      }
+    ]
   }
 ]

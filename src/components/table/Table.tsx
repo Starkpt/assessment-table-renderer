@@ -1,6 +1,6 @@
 import { useState } from "react";
 import categories from "../../data/categories.json";
-import data from "../../data/dummy_data2.json";
+import data from "../../data/dummy_data.json";
 import { Header, RowCategory } from "../../types/types";
 import { renderHeaders, renderRows } from "./helpers";
 
@@ -69,12 +69,21 @@ function Table() {
   }, []);
 
   const [hiddenColumns, setHiddenColumns] = useState<string[]>([]);
+  const [hiddenRows, setHiddenRows] = useState<string[]>([]);
 
   const handleColumnVisibility = (colName: any) => {
     setHiddenColumns((prevValues) =>
       prevValues.includes(colName)
         ? prevValues.filter((column) => column !== colName)
         : [...prevValues, colName]
+    );
+  };
+
+  const handleRowVisibility = (rowName: any) => {
+    setHiddenRows((prevValues) =>
+      prevValues.includes(rowName)
+        ? prevValues.filter((column) => column !== rowName)
+        : [...prevValues, rowName]
     );
   };
 
@@ -90,7 +99,16 @@ function Table() {
           </tr>
         </thead>
 
-        <tbody>{renderRows(data, headers, rows, hiddenColumns)}</tbody>
+        <tbody>
+          {renderRows(
+            data,
+            headers,
+            rows,
+            hiddenColumns,
+            handleRowVisibility,
+            hiddenRows
+          )}
+        </tbody>
       </table>
     </div>
   );

@@ -16,7 +16,6 @@ export function renderHeader(
   handleColumnVisibility?: any,
   hiddenColumns?: string[]
 ) {
-  console.log(hiddenColumns);
   return (
     <React.Fragment key={id}>
       <th>
@@ -25,7 +24,7 @@ export function renderHeader(
         {header.subHeaders && (
           <button
             onClick={() => {
-              handleColumnVisibility(header.id);
+              handleColumnVisibility && handleColumnVisibility(header.id);
             }}
           >
             {hiddenColumns?.find((column) => column === header.id) ? ">" : "<"}
@@ -121,12 +120,32 @@ export function renderCells(
  *
  */
 
-const renderCategoryCell = (category: string) => (
+const renderCategoryCell = (
+  row: RowCategory,
+  cellValue: string,
+  handleRowVisibility?: any,
+  hiddenRows?: string[]
+) => (
   <td>
     <table>
       <tbody>
         <tr>
-          <td>{category}</td>
+          <td>
+            {cellValue}
+
+            {row.subCategories && (
+              <button
+                onClick={() => {
+                  handleRowVisibility && handleRowVisibility(row.categoryId);
+                }}
+              >
+                {hiddenRows &&
+                hiddenRows?.find((hiddenRow) => hiddenRow === row.categoryId)
+                  ? ">"
+                  : "<"}
+              </button>
+            )}
+          </td>
         </tr>
         <tr>
           <td>&nbsp;</td>
@@ -162,14 +181,16 @@ export function renderRow(
   headers: Header[],
   row: RowCategory,
   id: number,
-  hiddenColumns?: string[]
+  hiddenColumns?: string[],
+  handleRowVisibility?: any,
+  hiddenRows?: string[]
 ): React.ReactNode {
   const rowData = data.filter((item) => item.categoryId === row.categoryId);
 
   return (
     <>
       <tr key={id}>
-        {renderCategoryCell(row.category)}
+        {renderCategoryCell(row, row.category, handleRowVisibility, hiddenRows)}
         {renderUnitCell()}
         {headers?.map(
           (header, headerId) =>
@@ -177,23 +198,37 @@ export function renderRow(
         )}
       </tr>
 
-      {row.subCategories?.map((subRow, subRowId) => {
-        const subRowData = data.filter(
-          (item) => item.subCategoryId === subRow.categoryId
-        );
+      {hiddenRows?.find((hiddenRow) => hiddenRow === row.categoryId)
+        ? null
+        : row.subCategories &&
+          row.subCategories?.map((subRow, subRowId) => {
+            const subRowData = data.filter(
+              (item) => item.subCategoryId === subRow.categoryId
+            );
 
-        return (
-          <tr key={subRowId}>
-            {renderCategoryCell(subRow.category)}
-            {renderUnitCell()}
-            {headers?.map(
-              (header, subHeaderId) =>
-                header.subHeaders &&
-                renderCell(subRowData, header, row, subHeaderId, hiddenColumns)
-            )}
-          </tr>
-        );
-      })}
+            return (
+              <tr key={subRowId}>
+                {renderCategoryCell(
+                  subRow,
+                  subRow.category,
+                  handleRowVisibility,
+                  hiddenRows
+                )}
+                {renderUnitCell()}
+                {headers?.map(
+                  (header, subHeaderId) =>
+                    header.subHeaders &&
+                    renderCell(
+                      subRowData,
+                      header,
+                      row,
+                      subHeaderId,
+                      hiddenColumns
+                    )
+                )}
+              </tr>
+            );
+          })}
     </>
   );
 }
@@ -202,12 +237,22 @@ export function renderRows(
   data: DataItem[],
   headers: Header[],
   rows: RowCategory[],
-  hiddenColumns?: string[]
+  hiddenColumns?: string[],
+  handleRowVisibility?: any,
+  hiddenRows?: string[]
 ) {
   return (
     rows &&
     rows.map((row, rowId) =>
-      renderRow(data, headers, row, rowId, hiddenColumns)
+      renderRow(
+        data,
+        headers,
+        row,
+        rowId,
+        hiddenColumns,
+        handleRowVisibility,
+        hiddenRows
+      )
     )
   );
 }
