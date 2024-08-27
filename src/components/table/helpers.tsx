@@ -1,4 +1,13 @@
 import React from "react";
+import {
+  Button,
+  Icon,
+  Table,
+  TableBody,
+  TableCell,
+  TableHeaderCell,
+  TableRow,
+} from "semantic-ui-react";
 import { DataItem, Header, RowCategory } from "../../types/types";
 
 /**
@@ -12,33 +21,40 @@ import { DataItem, Header, RowCategory } from "../../types/types";
 
 export function renderHeader(
   header: Header,
-  id: number,
+  headerId: number,
   handleColumnVisibility?: any,
   hiddenColumns?: string[]
 ) {
   return (
-    <React.Fragment key={id}>
-      <th>
-        {header.name}
-
+    <React.Fragment key={headerId}>
+      <TableHeaderCell>
         {header.subHeaders && (
-          <button
+          <Button
             onClick={() => {
               handleColumnVisibility && handleColumnVisibility(header.id);
             }}
           >
-            {hiddenColumns?.find((column) => column === header.id) ? ">" : "<"}
-          </button>
+            {hiddenColumns?.find((column) => column === header.id) ? (
+              <Icon name="angle double right" />
+            ) : (
+              <Icon name="angle double left" />
+            )}
+          </Button>
         )}
-      </th>
+
+        {header.name}
+      </TableHeaderCell>
 
       {hiddenColumns?.find((column) => column === header.id)
         ? null
         : header.subHeaders &&
-          renderHeaders(
-            header.subHeaders,
-            handleColumnVisibility,
-            hiddenColumns
+          header.subHeaders.map((subHeader, subHeaderId) =>
+            renderHeader(
+              subHeader,
+              subHeaderId,
+              handleColumnVisibility,
+              hiddenColumns
+            )
           )}
     </React.Fragment>
   );
@@ -74,21 +90,27 @@ export function renderCell(
 
   return (
     <React.Fragment key={id}>
-      <td>
-        <table>
-          <tbody>
-            <tr>
-              <td>{cellValue?.units || 0}</td>
-            </tr>
-            <tr>
-              <td>{cellValue?.unitPrice[0].value || 0}</td>
-            </tr>
-            <tr>
-              <td>{cellValue?.grossRevenue || 0}</td>
-            </tr>
-          </tbody>
-        </table>
-      </td>
+      <TableCell>
+        <Table style={{ background: "transparent", border: 0 }}>
+          <TableBody style={{ background: "transparent" }}>
+            <TableRow style={{ background: "transparent" }}>
+              <TableCell style={{ background: "transparent", border: 0 }}>
+                {cellValue?.units || 0}
+              </TableCell>
+            </TableRow>
+            <TableRow style={{ background: "transparent" }}>
+              <TableCell style={{ background: "transparent", border: 0 }}>
+                {cellValue?.unitPrice[0].value || 0}
+              </TableCell>
+            </TableRow>
+            <TableRow style={{ background: "transparent" }}>
+              <TableCell style={{ background: "transparent", border: 0 }}>
+                {cellValue?.grossRevenue || 0}
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </TableCell>
 
       {hiddenColumns?.find((column) => column === header.id)
         ? null
@@ -126,61 +148,76 @@ const renderCategoryCell = (
   handleRowVisibility?: any,
   hiddenRows?: string[]
 ) => (
-  <td>
-    <table>
-      <tbody>
-        <tr>
-          <td>
-            {cellValue}
-
+  <TableCell>
+    <Table style={{ background: "transparent", border: 0 }}>
+      <TableBody style={{ background: "transparent" }}>
+        <TableRow style={{ background: "transparent" }}>
+          <TableCell style={{ background: "transparent", border: 0 }}>
             {row.subCategories && (
-              <button
+              // <ButtonGroup vertical labeled icon>
+              <Button
                 onClick={() => {
                   handleRowVisibility && handleRowVisibility(row.categoryId);
                 }}
-              >
-                {hiddenRows &&
-                hiddenRows?.find((hiddenRow) => hiddenRow === row.categoryId)
-                  ? ">"
-                  : "<"}
-              </button>
+                compact
+                icon={
+                  hiddenRows &&
+                  hiddenRows?.find((hiddenRow) => hiddenRow === row.categoryId)
+                    ? "chevron right"
+                    : "chevron down"
+                }
+                // content={cellValue}
+              />
+              // </ButtonGroup>
             )}
-          </td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-        </tr>
-      </tbody>
-    </table>
-  </td>
+
+            {cellValue}
+          </TableCell>
+        </TableRow>
+        <TableRow style={{ background: "transparent" }}>
+          <TableCell style={{ background: "transparent", border: 0 }}>
+            &nbsp;
+          </TableCell>
+        </TableRow>
+        <TableRow style={{ background: "transparent" }}>
+          <TableCell style={{ background: "transparent", border: 0 }}>
+            &nbsp;
+          </TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  </TableCell>
 );
 
 const renderUnitCell = () => (
-  <td>
-    <table>
-      <tbody>
-        <tr>
-          <td>Units</td>
-        </tr>
-        <tr>
-          <td>Unit Price</td>
-        </tr>
-        <tr>
-          <td>Gross Revenue</td>
-        </tr>
-      </tbody>
-    </table>
-  </td>
+  <TableCell>
+    <Table style={{ background: "transparent", border: 0 }}>
+      <TableBody style={{ background: "transparent" }}>
+        <TableRow style={{ background: "transparent" }}>
+          <TableCell style={{ background: "transparent", border: 0 }}>
+            Units
+          </TableCell>
+        </TableRow>
+        <TableRow style={{ background: "transparent" }}>
+          <TableCell style={{ background: "transparent", border: 0 }}>
+            Unit Price
+          </TableCell>
+        </TableRow>
+        <TableRow style={{ background: "transparent" }}>
+          <TableCell style={{ background: "transparent", border: 0 }}>
+            Gross Revenue
+          </TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  </TableCell>
 );
 
 export function renderRow(
   data: DataItem[],
   headers: Header[],
   row: RowCategory,
-  id: number,
+  rowId: number,
   hiddenColumns?: string[],
   handleRowVisibility?: any,
   hiddenRows?: string[]
@@ -188,15 +225,15 @@ export function renderRow(
   const rowData = data.filter((item) => item.categoryId === row.categoryId);
 
   return (
-    <>
-      <tr key={id}>
+    <React.Fragment key={rowId}>
+      <TableRow>
         {renderCategoryCell(row, row.category, handleRowVisibility, hiddenRows)}
         {renderUnitCell()}
         {headers?.map(
           (header, headerId) =>
             header && renderCell(rowData, header, row, headerId, hiddenColumns)
         )}
-      </tr>
+      </TableRow>
 
       {hiddenRows?.find((hiddenRow) => hiddenRow === row.categoryId)
         ? null
@@ -207,29 +244,31 @@ export function renderRow(
             );
 
             return (
-              <tr key={subRowId}>
-                {renderCategoryCell(
-                  subRow,
-                  subRow.category,
-                  handleRowVisibility,
-                  hiddenRows
-                )}
-                {renderUnitCell()}
-                {headers?.map(
-                  (header, subHeaderId) =>
-                    header.subHeaders &&
-                    renderCell(
-                      subRowData,
-                      header,
-                      row,
-                      subHeaderId,
-                      hiddenColumns
-                    )
-                )}
-              </tr>
+              <React.Fragment key={subRowId}>
+                <TableRow>
+                  {renderCategoryCell(
+                    subRow,
+                    subRow.category,
+                    handleRowVisibility,
+                    hiddenRows
+                  )}
+                  {renderUnitCell()}
+                  {headers?.map(
+                    (header, subHeaderId) =>
+                      header.subHeaders &&
+                      renderCell(
+                        subRowData,
+                        header,
+                        row,
+                        subHeaderId,
+                        hiddenColumns
+                      )
+                  )}
+                </TableRow>
+              </React.Fragment>
             );
           })}
-    </>
+    </React.Fragment>
   );
 }
 

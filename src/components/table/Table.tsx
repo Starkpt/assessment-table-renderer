@@ -3,6 +3,13 @@ import categories from "../../data/categories.json";
 import data from "../../data/dummy_data.json";
 import { Header, RowCategory } from "../../types/types";
 import { renderHeaders, renderRows } from "./helpers";
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderCell,
+  TableRow,
+} from "semantic-ui-react";
 
 const headers: Header[] = [
   {
@@ -37,7 +44,7 @@ const headers: Header[] = [
   },
 ];
 
-function Table() {
+function TableComponent() {
   const rows = categories.reduce((acc: RowCategory[], cur) => {
     let existingCategory = acc.find(
       (entry) => entry.categoryId === cur.categoryId
@@ -88,30 +95,28 @@ function Table() {
   };
 
   return (
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            <th></th>
+    <Table definition collapsing striped>
+      <TableHeader>
+        <TableRow>
+          <TableHeaderCell></TableHeaderCell>
+          <TableHeaderCell></TableHeaderCell>
 
-            {renderHeaders(headers, handleColumnVisibility, hiddenColumns)}
-          </tr>
-        </thead>
+          {renderHeaders(headers, handleColumnVisibility, hiddenColumns)}
+        </TableRow>
+      </TableHeader>
 
-        <tbody>
-          {renderRows(
-            data,
-            headers,
-            rows,
-            hiddenColumns,
-            handleRowVisibility,
-            hiddenRows
-          )}
-        </tbody>
-      </table>
-    </div>
+      <TableBody>
+        {renderRows(
+          data,
+          headers,
+          rows,
+          hiddenColumns,
+          handleRowVisibility,
+          hiddenRows
+        )}
+      </TableBody>
+    </Table>
   );
 }
 
-export default Table;
+export default TableComponent;
