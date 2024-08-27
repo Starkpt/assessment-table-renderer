@@ -33,13 +33,14 @@ export function renderHeader(
             onClick={() => {
               handleColumnVisibility && handleColumnVisibility(header.id);
             }}
-          >
-            {hiddenColumns?.find((column) => column === header.id) ? (
-              <Icon name="angle double right" />
-            ) : (
-              <Icon name="angle double left" />
-            )}
-          </Button>
+            icon={
+              hiddenColumns?.find((column) => column === header.id) ? (
+                <Icon name="angle double right" />
+              ) : (
+                <Icon name="angle double left" />
+              )
+            }
+          />
         )}
 
         {header.name}
@@ -154,7 +155,6 @@ const renderCategoryCell = (
         <TableRow style={{ background: "transparent" }}>
           <TableCell style={{ background: "transparent", border: 0 }}>
             {row.subCategories && (
-              // <ButtonGroup vertical labeled icon>
               <Button
                 onClick={() => {
                   handleRowVisibility && handleRowVisibility(row.categoryId);
@@ -166,9 +166,7 @@ const renderCategoryCell = (
                     ? "chevron right"
                     : "chevron down"
                 }
-                // content={cellValue}
               />
-              // </ButtonGroup>
             )}
 
             {cellValue}
