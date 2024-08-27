@@ -95,27 +95,29 @@ function TableComponent() {
   };
 
   return (
-    <Table definition collapsing striped>
-      <TableHeader>
-        <TableRow>
-          <TableHeaderCell></TableHeaderCell>
-          <TableHeaderCell></TableHeaderCell>
+    <div style={{ padding: "10vh 5vw" }}>
+      <Table definition collapsing striped>
+        <TableHeader>
+          <TableRow>
+            <TableHeaderCell></TableHeaderCell>
+            <TableHeaderCell></TableHeaderCell>
 
-          {renderHeaders(headers, handleColumnVisibility, hiddenColumns)}
-        </TableRow>
-      </TableHeader>
+            {renderHeaders(headers, handleColumnVisibility, hiddenColumns)}
+          </TableRow>
+        </TableHeader>
 
-      <TableBody>
-        {renderRows(
-          data,
-          headers,
-          rows,
-          hiddenColumns,
-          handleRowVisibility,
-          hiddenRows
-        )}
-      </TableBody>
-    </Table>
+        <TableBody>
+          {renderRows(
+            data,
+            headers,
+            rows,
+            hiddenColumns,
+            handleRowVisibility,
+            hiddenRows
+          )}
+        </TableBody>
+      </Table>
+    </div>
   );
 }
 

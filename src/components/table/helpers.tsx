@@ -34,11 +34,9 @@ export function renderHeader(
               handleColumnVisibility && handleColumnVisibility(header.id);
             }}
             icon={
-              hiddenColumns?.find((column) => column === header.id) ? (
-                <Icon name="angle double right" />
-              ) : (
-                <Icon name="angle double left" />
-              )
+              hiddenColumns?.find((column) => column === header.id)
+                ? "angle double right"
+                : "angle double left"
             }
           />
         )}
