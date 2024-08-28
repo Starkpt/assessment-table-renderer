@@ -3,13 +3,7 @@ import categories from "../../data/categories.json";
 import data from "../../data/dummy_data.json";
 import { Header, RowCategory } from "../../types/types";
 import { renderHeaders, renderRows } from "./helpers";
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderCell,
-  TableRow,
-} from "semantic-ui-react";
+import { Table, TableBody, TableHeader, TableHeaderCell, TableRow } from "semantic-ui-react";
 
 const headers: Header[] = [
   {
@@ -46,9 +40,7 @@ const headers: Header[] = [
 
 function TableComponent() {
   const rows = categories.reduce((acc: RowCategory[], cur) => {
-    let existingCategory = acc.find(
-      (entry) => entry.categoryId === cur.categoryId
-    );
+    let existingCategory = acc.find((entry) => entry.categoryId === cur.categoryId);
 
     if (!existingCategory) {
       existingCategory = {
@@ -62,9 +54,7 @@ function TableComponent() {
 
     if (
       existingCategory.subCategories &&
-      !existingCategory.subCategories.some(
-        (sub) => sub.categoryId === cur.subCategoryId
-      )
+      !existingCategory.subCategories.some((sub) => sub.categoryId === cur.subCategoryId)
     ) {
       existingCategory.subCategories.push({
         category: cur.subCategory,
@@ -96,7 +86,7 @@ function TableComponent() {
 
   return (
     <div style={{ padding: "10vh 5vw" }}>
-      <Table definition collapsing striped>
+      <Table definition collapsing striped selectable compact>
         <TableHeader>
           <TableRow>
             <TableHeaderCell></TableHeaderCell>
@@ -107,14 +97,7 @@ function TableComponent() {
         </TableHeader>
 
         <TableBody>
-          {renderRows(
-            data,
-            headers,
-            rows,
-            hiddenColumns,
-            handleRowVisibility,
-            hiddenRows
-          )}
+          {renderRows(data, headers, rows, hiddenColumns, handleRowVisibility, hiddenRows)}
         </TableBody>
       </Table>
     </div>
